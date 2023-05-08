@@ -1,0 +1,2 @@
+# EjercicioPrimitiva
+Ejercicio de Java
