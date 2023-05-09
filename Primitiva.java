@@ -84,10 +84,5 @@ public class Primitiva {
         System.out.println("\n"+resultadoNumeros+"\n"+resultadoReintegro+
                 "\n\nNumeros jugado:    "+numerosJugados+"Reintegro jugado: "+reintegroJugado+
                 "\nNumeros ganadores: "+numerosGanador+"Reintegro ganador: "+reintegroGanador);
-
-    }
-
-    }
-        
     }
 }
