@@ -1,17 +1,20 @@
+package primitiva;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.Scanner;
 
 public class Primitiva {
 
     public static void main(String[] args) {
 
         Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
 
-        int x;
-        int y;
+        int comprobarSorteo;
         int reintegroJugado;
         int reintegroGanador;
         boolean compareReintegro;
@@ -27,41 +30,49 @@ public class Primitiva {
 
         // Llama a el metodo que extrae valores en argumments y los agregar a ArrayList.
         extracted(args, jugado);
-
         numerosJugados = jugado;
 
         // Agregar reintegro jugado a ArrayList Reintegro
         reintegroJugado = numerosJugados.get(7);
-
         // Eliminar numero de reintegro de ArrayList numerosJugados
         numerosJugados.remove(7);
         // Ordenar numeros de < a >
         Collections.sort(numerosJugados);
 
+        System.out.println("Escoje cuantos sorteos anterior a compropbar tus numeros(elejir entre 1 a 1000: ");
+        comprobarSorteo=scanner.nextInt();
 
-        // Llama a el metodo que usa For loop para generar numeros aleatorios
-        extracted(random, ganador, numerosGanador);
+        if (comprobarSorteo>0 && comprobarSorteo<1001){
 
-        // Agregar reintegro ganador a ArrayList reintegroGanador
-        reintegroGanador = ganador.get(7);
+            for(int i=0; i<comprobarSorteo;i++){
+                numerosGanador.removeAll(numerosGanador);
+                // Llama a el metodo que usa For loop para generar numeros aleatorios
+                extracted(random, ganador, numerosGanador);
 
-        // Comparar los numeros jugados y copiar los numeros acertados
-        compareNumeros = new ArrayList<>(numerosGanador.stream().filter(numerosJugados::contains).collect(Collectors.toList()));
-        // Boolean para ver si los reintegros son iguales.
-        compareReintegro = reintegroGanador==reintegroJugado;
+                // Agregar reintegro ganador a ArrayList reintegroGanador
+                reintegroGanador = ganador.get(7);
 
-        // Llama a el metodo para Comprovar si el reintegro es ganador o no.
-        resultadoReintegro = getString(reintegroJugado, compareReintegro);
-        // Llama a el metodo para Comprovar si hay numeros ganadores.
+                // Comparar los numeros jugados y copiar los numeros acertados
+                compareNumeros = new ArrayList<>(numerosGanador.stream().filter(numerosJugados::contains).collect(Collectors.toList()));
 
-        resultadoNumeros = getString(numerosJugados, compareNumeros);
+                // Boolean para ver si los reintegros son iguales.
+                compareReintegro = reintegroGanador==reintegroJugado;
+
+                // Llama a el metodo para Comprovar si el reintegro es ganador o no.
+                resultadoReintegro = getString(reintegroJugado, compareReintegro);
+                // Llama a el metodo para Comprovar si hay numeros ganadores.
+                resultadoNumeros = getString(numerosJugados, compareNumeros);
 
 
-        System.out.println("\n"+resultadoNumeros+"\n"+resultadoReintegro+
-                "\n\nNumeros jugado:    "+numerosJugados+"\n Reintegro jugado:  "+reintegroJugado+
+                System.out.println("\n"+resultadoNumeros+"\n"+resultadoReintegro+
+                        "\n\nNumeros jugado:    "+numerosJugados+"\n Reintegro jugado:  "+reintegroJugado+
 
-                "\nNumeros ganadores: "+numerosGanador+"\n Reintegro ganador: "+reintegroGanador);
-
+                        "\nNumeros ganadores: "+numerosGanador+"\n Reintegro ganador: "+reintegroGanador);
+            }
+        }
+        else{
+            System.out.println("Introduce un valor valido!!!");
+        }
 
     }
 
