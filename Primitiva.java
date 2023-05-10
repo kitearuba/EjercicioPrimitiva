@@ -31,7 +31,34 @@ public class Primitiva {
         // Eliminar numero de reintegro de ArrayList numerosJugados
         numerosJugados.remove(7);
 
-        // For loop para generar numeros aleatorios
+        // Llama a el metodo que usa For loop para generar numeros aleatorios
+        extracted(random, ganador, numerosGanador);
+
+        // Agregar reintegro ganador a ArrayList reintegroGanador
+        reintegroGanador = ganador.get(7);
+
+        // Comparar los numeros jugados y copiar los numeros acertados
+        compareNumeros = new ArrayList<>(numerosGanador.stream().filter(numerosJugados::contains).collect(Collectors.toList()));
+        // Boolean para ver si los reintegros son iguales.
+        compareReintegro = reintegroGanador==reintegroJugado;
+
+        // Llama a el metodo para Comprovar si el reintegro es ganador o no.
+        resultadoReintegro = getString(reintegroJugado, compareReintegro);
+        // Llama a el metodo para Comprovar si hay numeros ganadores.
+
+        resultadoNumeros = getString(numerosJugados, compareNumeros);
+
+
+        System.out.println("\n"+resultadoNumeros+"\n"+resultadoReintegro+
+                "\n\nNumeros jugado:    "+numerosJugados+"Reintegro jugado: "+reintegroJugado+
+
+                "\nNumeros ganadores: "+numerosGanador+"Reintegro ganador: "+reintegroGanador);
+
+    }
+
+    private static void extracted(Random random, ArrayList<Integer> ganador, ArrayList<Integer> numerosGanador) {
+        int y;
+        int x;
         for (int i = 0; i < 7;) {
             x = random.nextInt(49)+1;
 
@@ -52,35 +79,28 @@ public class Primitiva {
                 }
             }
         }
+    }
 
-        // Agregar reintegro ganador a ArrayList reintegroGanador
-        reintegroGanador = ganador.get(7);
-
-        // Comparar los numeros jugados y copiar los numeros acertados
-        compareNumeros = new ArrayList<>(numerosGanador.stream().filter(numerosJugados::contains).collect(Collectors.toList()));
-        // Boolean para ver si los reintegros son iguales.
-        compareReintegro = reintegroGanador==reintegroJugado;
-
-        // Comprovar si el reintegro es ganador o no.
-        if(compareReintegro == true){
-            resultadoReintegro = "Felicitaciones a acertado el Reintegro. Numero ganador: "+reintegroJugado;
-        }else{
-            resultadoReintegro = "Reintegro no acertado.";
-        }
-        // Comprovar si hay numeros ganadores.
+    private static String getString(ArrayList<Integer> numerosJugados, ArrayList<Integer> compareNumeros) {
+        String resultadoNumeros;
         if(compareNumeros.size() == 7){
-            resultadoNumeros= "Felicitaciones a acertado todos los numeros! Numero ganador: "+numerosJugados;
+            resultadoNumeros= "Felicitaciones a acertado todos los numeros! Numero ganador: "+ numerosJugados;
         }else if(compareNumeros.size()>0 && compareNumeros.size()<7){
-            resultadoNumeros = "As acertados " + compareNumeros.size()+ " numeros"+"\nNumeros acertados: "+compareNumeros;
+            resultadoNumeros = "As acertados " + compareNumeros.size()+ " numeros"+"\nNumeros acertados: "+ compareNumeros;
         }else{
             resultadoNumeros = "No acerto ningun numero";
         }
+        return resultadoNumeros;
+    }
 
-        System.out.println("\n"+resultadoNumeros+"\n"+resultadoReintegro+
-                "\n\nNumeros jugado:    "+numerosJugados+"Reintegro jugado: "+reintegroJugado+
-
-                "\nNumeros ganadores: "+numerosGanador+"Reintegro ganador: "+reintegroGanador);
-
+    private static String getString(int reintegroJugado, boolean compareReintegro) {
+        String resultadoReintegro;
+        if(compareReintegro == true){
+            resultadoReintegro = "Felicitaciones a acertado el Reintegro. Numero ganador: "+ reintegroJugado;
+        }else{
+            resultadoReintegro = "Reintegro no acertado.";
+        }
+        return resultadoReintegro;
     }
 
 }
