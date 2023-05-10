@@ -19,17 +19,25 @@ public class Primitiva {
         String resultadoReintegro;
 
         // Crear ArrayLists
-        ArrayList<Integer> jugado = new ArrayList<Integer>(Arrays.asList(3,5,11,32,33,41,49,9));
-        ArrayList<Integer> numerosJugados = new ArrayList<Integer>(jugado);
+        ArrayList<Integer> jugado = new ArrayList<Integer>();
         ArrayList<Integer> ganador = new ArrayList<>();
         ArrayList<Integer> numerosGanador = new ArrayList<>();
         ArrayList<Integer> compareNumeros = new ArrayList<Integer>();
+        ArrayList<Integer> numerosJugados = new ArrayList<Integer>();
+
+        // Llama a el metodo que extrae valores en argumments y los agregar a ArrayList.
+        extracted(args, jugado);
+
+        numerosJugados = jugado;
 
         // Agregar reintegro jugado a ArrayList Reintegro
         reintegroJugado = numerosJugados.get(7);
 
         // Eliminar numero de reintegro de ArrayList numerosJugados
         numerosJugados.remove(7);
+        // Ordenar numeros de < a >
+        Collections.sort(numerosJugados);
+
 
         // Llama a el metodo que usa For loop para generar numeros aleatorios
         extracted(random, ganador, numerosGanador);
@@ -50,10 +58,17 @@ public class Primitiva {
 
 
         System.out.println("\n"+resultadoNumeros+"\n"+resultadoReintegro+
-                "\n\nNumeros jugado:    "+numerosJugados+"Reintegro jugado: "+reintegroJugado+
+                "\n\nNumeros jugado:    "+numerosJugados+"\n Reintegro jugado:  "+reintegroJugado+
 
-                "\nNumeros ganadores: "+numerosGanador+"Reintegro ganador: "+reintegroGanador);
+                "\nNumeros ganadores: "+numerosGanador+"\n Reintegro ganador: "+reintegroGanador);
 
+
+    }
+
+    private static void extracted(String[] args, ArrayList<Integer> jugado) {
+        for (String arg : args) {
+            jugado.add(Integer.valueOf(arg));
+        }
     }
 
     private static void extracted(Random random, ArrayList<Integer> ganador, ArrayList<Integer> numerosGanador) {
