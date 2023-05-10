@@ -12,24 +12,21 @@ public class Primitiva {
 
         int x;
         int y;
-        int reintGanador;
-
+        int reintegroJugado;
+        int reintegroGanador;
+        boolean compareReintegro;
         String resultadoNumeros;
         String resultadoReintegro;
 
         // Crear ArrayLists
         ArrayList<Integer> jugado = new ArrayList<Integer>(Arrays.asList(3,5,11,32,33,41,49,9));
         ArrayList<Integer> numerosJugados = new ArrayList<Integer>(jugado);
-        ArrayList<Integer> reintegroJugado = new ArrayList<Integer>();
         ArrayList<Integer> ganador = new ArrayList<>();
         ArrayList<Integer> numerosGanador = new ArrayList<>();
-        ArrayList<Integer> reintegroGanador = new ArrayList<>();
         ArrayList<Integer> compareNumeros = new ArrayList<Integer>();
-        boolean compareReintegro;
 
         // Agregar reintegro jugado a ArrayList Reintegro
-        int reintJugado = numerosJugados.get(7);
-        reintegroJugado.add(reintJugado);
+        reintegroJugado = numerosJugados.get(7);
 
         // Eliminar numero de reintegro de ArrayList numerosJugados
         numerosJugados.remove(7);
@@ -57,14 +54,13 @@ public class Primitiva {
         }
 
         // Agregar reintegro ganador a ArrayList reintegroGanador
-        reintGanador = ganador.get(7);
-        reintegroGanador.add(reintGanador);
+        reintegroGanador = ganador.get(7);
 
-        // Eliminar numero de reintegro de ArrayList numerosGanador
-        //numerosGanador.remove(7);
-
+        // Comparar los numeros jugados y copiar los numeros acertados
         compareNumeros = new ArrayList<>(numerosGanador.stream().filter(numerosJugados::contains).collect(Collectors.toList()));
-        compareReintegro = reintegroGanador.equals(reintegroJugado);
+        // Boolean para ver si los reintegros son iguales.
+        compareReintegro = reintegroGanador==reintegroJugado;
+
         // Comprovar si el reintegro es ganador o no.
         if(compareReintegro == true){
             resultadoReintegro = "Felicitaciones a acertado el Reintegro. Numero ganador: "+reintegroJugado;
@@ -78,11 +74,13 @@ public class Primitiva {
             resultadoNumeros = "As acertados " + compareNumeros.size()+ " numeros"+"\nNumeros acertados: "+compareNumeros;
         }else{
             resultadoNumeros = "No acerto ningun numero";
-        }       
-        
-        // Imprimir resultados
+        }
+
         System.out.println("\n"+resultadoNumeros+"\n"+resultadoReintegro+
                 "\n\nNumeros jugado:    "+numerosJugados+"Reintegro jugado: "+reintegroJugado+
+
                 "\nNumeros ganadores: "+numerosGanador+"Reintegro ganador: "+reintegroGanador);
+
     }
+
 }
