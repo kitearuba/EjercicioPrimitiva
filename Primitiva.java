@@ -1,3 +1,5 @@
+//Agregar valores del ticket a comprobar en Arguments o no funcionara el codigo
+
 import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
